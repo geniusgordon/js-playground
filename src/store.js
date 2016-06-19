@@ -14,7 +14,6 @@ export default function configureStore() {
     module.hot.accept('./reducers', () => {
       const nextReducer = require('./reducers').default;
       const decorator = require('./containers/Editor/decorator').default;
-      console.log(decorator);
       store.replaceReducer(nextReducer);
       store.dispatch({
         type: 'DECORATOR_HOT_RELOAD',

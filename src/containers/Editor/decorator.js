@@ -9,6 +9,8 @@ const color = {
   builtIn: '#42b983',
   comment: '#b3b3b3',
   string: '#42b983',
+  number: '#ae81ff',
+  function: '#0092db',
 };
 
 function getComponent(type) {

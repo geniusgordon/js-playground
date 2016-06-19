@@ -1,6 +1,6 @@
 const keywords = {
   keyword:
-    'in of if for while finally var new function do return void else break catch ' +
+    'in of if for while finally var new do return void else break catch ' +
     'instanceof with throw case default try this switch continue typeof delete ' +
     'let yield const export super debugger as async await static ' +
     'import from as',
@@ -33,6 +33,15 @@ const rules = [{
 }, {
   type: 'string',
   regex: /`(.|\n)*`/g,
+}, {
+  type: 'number',
+  regex: /(-?)(\b0[xX][a-fA-F0-9]+|(\b\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?)\b/g,
+}, {
+  type: 'number',
+  regex: /\b(0b[01]+)\b/g,
+}, {
+  type: 'function',
+  regex: /\bfunction\b/g,
 }];
 
 Object.keys(keywords).forEach((key) => {
