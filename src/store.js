@@ -13,7 +13,13 @@ export default function configureStore() {
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const nextReducer = require('./reducers').default;
+      const decorator = require('./containers/Editor/decorator').default;
+      console.log(decorator);
       store.replaceReducer(nextReducer);
+      store.dispatch({
+        type: 'DECORATOR_HOT_RELOAD',
+        decorator,
+      });
     });
   }
   /* eslint-enable global-require */
