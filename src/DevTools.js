@@ -7,14 +7,20 @@ import MultipleMonitors from 'redux-devtools-multiple-monitors';
 import FilterMonitor from 'redux-devtools-filter-actions';
 import * as actionCreators from './actions';
 
+const blacklist = [
+  'MOUSE_MOVE',
+  'MOUSE_UP',
+  'EDIT',
+];
+
 const DevTools = createDevTools(
   <DockMonitor
-    toggleVisibilityKey="h"
-    changePositionKey="q"
+    toggleVisibilityKey="ctrl-h"
+    changePositionKey="ctrl-q"
     defaultIsVisible={false}
   >
     <MultipleMonitors>
-      <FilterMonitor blacklist={['MOUSE_MOVE']} >
+      <FilterMonitor blacklist={blacklist} >
         <LogMonitor />
       </FilterMonitor>
       <Dispatcher actionCreators={actionCreators} />

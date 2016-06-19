@@ -6,6 +6,7 @@ import styles from './styles.scss';
 
 class Window extends Component {
   static propTypes = {
+    children: PropTypes.node,
     left: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
@@ -49,6 +50,7 @@ class Window extends Component {
           className={styles.resizeHandle}
           onMouseDown={onResizeWindowStart}
         />
+        {this.props.children}
       </div>
     );
   }
@@ -66,7 +68,7 @@ const mapDispatchToProps = (dispatch) => ({
   onMouseMove(e) {
     throttle((x, y) => {
       dispatch(mouseMove(x, y));
-    }, 100)(e.clientX, e.clientY);
+    }, 300)(e.clientX, e.clientY);
   },
   onMouseUp() {
     dispatch(mouseUp());

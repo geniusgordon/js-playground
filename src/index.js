@@ -11,9 +11,10 @@ render(
   document.getElementById('root')
 );
 
+/* eslint-disable global-require */
 if (module.hot) {
   module.hot.accept('./Root', () => {
-    const NextRoot = require('./Root').default; // eslint-disable-line global-require
+    const NextRoot = require('./Root').default;
     render(
       <NextRoot store={store} />,
       document.getElementById('root')

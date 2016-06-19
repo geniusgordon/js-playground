@@ -9,13 +9,19 @@ export default function configureStore() {
       DevTools.instrument()
     )
   );
-
+  /* eslint-disable global-require */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      const nextReducer = require('./reducers').default; // eslint-disable-line global-require
+      const nextReducer = require('./reducers').default;
+      const decorator = require('./containers/Editor/decorator').default;
       store.replaceReducer(nextReducer);
+      store.dispatch({
+        type: 'DECORATOR_HOT_RELOAD',
+        decorator,
+      });
     });
   }
+  /* eslint-enable global-require */
 
   return store;
 }
