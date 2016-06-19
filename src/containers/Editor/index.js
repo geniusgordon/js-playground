@@ -43,7 +43,7 @@ class CodeEditor extends Component {
   }
   render() {
     return (
-      <div className={styles.editor}>
+      <div className={styles.editor} style={{ color: '#525252' }}>
         <Editor
           editorState={this.props.editorState}
           onChange={this.props.onChange}
