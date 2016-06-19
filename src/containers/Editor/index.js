@@ -16,6 +16,7 @@ class CodeEditor extends Component {
     this.keyBindingFn = this.keyBindingFn.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
     this.handleTab = this.handleTab.bind(this);
+    this.focus = () => this.refs.editor.focus();
   }
   handleKeyCommand(command) {
     const { editorState, onChange } = this.props;
@@ -43,8 +44,9 @@ class CodeEditor extends Component {
   }
   render() {
     return (
-      <div className={styles.editor} style={{ color: '#525252' }}>
+      <div className={styles.editor} style={{ color: '#525252' }} onClick={this.focus}>
         <Editor
+          ref="editor"
           editorState={this.props.editorState}
           onChange={this.props.onChange}
           keyBindingFn={this.keyBindingFn}
