@@ -1,7 +1,8 @@
 import React from 'react';
+import Window from './Window';
 
 const App = () => (
-  <div>App</div>
+  <Window />
 );
 
 export default App;
