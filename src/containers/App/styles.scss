@@ -16,3 +16,15 @@
   background: linear-gradient(#e7e7e6, #E2E2E1);
 }
 
+.resize-handle {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 10px;
+  height: 10px;
+	border-right: 2px solid;
+	border-bottom: 2px solid;
+	border-color: #555;
+  cursor: se-resize;
+}
+

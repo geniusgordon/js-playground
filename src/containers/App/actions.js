@@ -1,8 +1,14 @@
-export function dragWindow(x, y) {
+export function mouseMove(x, y) {
   return {
-    type: 'DRAG_WINDOW',
+    type: 'MOUSE_MOVE',
     x,
     y,
+  };
+}
+
+export function mouseUp() {
+  return {
+    type: 'MOUSE_UP',
   };
 }
 
@@ -14,9 +20,11 @@ export function dragWindowStart(x, y) {
   };
 }
 
-export function dragWindowEnd() {
+export function resizeWindowStart(x, y) {
   return {
-    type: 'DRAG_WINDOW_END',
+    type: 'RESIZE_WINDOW_START',
+    x,
+    y,
   };
 }
 

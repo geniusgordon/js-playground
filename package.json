@@ -43,6 +43,7 @@
     "redux-devtools": "^3.3.1",
     "redux-devtools-dispatch": "^2.2.0",
     "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-filter-actions": "^1.2.0",
     "redux-devtools-log-monitor": "^1.0.11",
     "redux-devtools-multiple-monitors": "^1.0.1",
     "style-loader": "^0.13.1",

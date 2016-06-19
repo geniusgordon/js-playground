@@ -1,16 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { throttle } from 'lodash/function';
-import { dragWindow, dragWindowStart, dragWindowEnd } from './actions';
+import { mouseMove, mouseUp, dragWindowStart, resizeWindowStart } from './actions';
 import styles from './styles.scss';
 
 class Window extends Component {
   static propTypes = {
     left: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
     onMouseMove: PropTypes.func.isRequired,
-    onMouseDown: PropTypes.func.isRequired,
     onMouseUp: PropTypes.func.isRequired,
+    onDragWindowStart: PropTypes.func.isRequired,
+    onResizeWindowStart: PropTypes.func.isRequired,
   };
   constructor(...args) {
     super(...args);
@@ -32,12 +35,19 @@ class Window extends Component {
     this.props.onMouseUp();
   }
   render() {
-    const { left, top, onMouseDown } = this.props;
+    const {
+      left, top, width, height,
+      onDragWindowStart, onResizeWindowStart,
+    } = this.props;
     return (
-      <div className={styles.window} style={{ left, top }}>
+      <div className={styles.window} style={{ left, top, width, height }}>
         <div
           className={styles.toolbar}
-          onMouseDown={onMouseDown}
+          onMouseDown={onDragWindowStart}
+        />
+        <div
+          className={styles.resizeHandle}
+          onMouseDown={onResizeWindowStart}
         />
       </div>
     );
@@ -48,19 +58,24 @@ class Window extends Component {
 const mapStateToProps = (state) => ({
   left: state.app.left,
   top: state.app.top,
+  width: state.app.width,
+  height: state.app.height,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onMouseDown(e) {
-    dispatch(dragWindowStart(e.clientX, e.clientY));
-  },
   onMouseMove(e) {
     throttle((x, y) => {
-      dispatch(dragWindow(x, y));
+      dispatch(mouseMove(x, y));
     }, 100)(e.clientX, e.clientY);
   },
   onMouseUp() {
-    dispatch(dragWindowEnd());
+    dispatch(mouseUp());
+  },
+  onDragWindowStart(e) {
+    dispatch(dragWindowStart(e.clientX, e.clientY));
+  },
+  onResizeWindowStart(e) {
+    dispatch(resizeWindowStart(e.clientX, e.clientY));
   },
 });
 
