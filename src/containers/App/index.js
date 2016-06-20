@@ -6,7 +6,7 @@ import Compiler from '../Compiler';
 const App = () => (
   <Window>
     <Editor />
-    <Compiler />
+    <Compiler executeKey="ctrl-j" />
   </Window>
 );
 
