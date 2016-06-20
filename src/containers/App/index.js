@@ -1,10 +1,12 @@
 import React from 'react';
 import Window from './Window';
-import CodeEditor from '../Editor';
+import Editor from '../Editor';
+import Compiler from '../Compiler';
 
 const App = () => (
   <Window>
-    <CodeEditor />
+    <Editor />
+    <Compiler />
   </Window>
 );
 
