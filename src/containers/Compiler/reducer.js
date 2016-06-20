@@ -1,20 +1,13 @@
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-  running: false,
-  error: false,
-  runtime: -1,
+  error: null,
 };
 
 const reducer = handleActions({
-  EXECUTE: (state) => ({
+  RUNTIME_ERROR: (state, action) => ({
     ...state,
-    running: true,
-    error: false,
-  }),
-  TERMINATE: (state) => ({
-    ...state,
-    running: false,
+    error: action.error,
   }),
 }, initialState);
 

@@ -10,3 +10,10 @@ export function terminate() {
   };
 }
 
+export function runtimeError(error) {
+  return {
+    type: 'RUNTIME_ERROR',
+    error,
+  };
+}
+

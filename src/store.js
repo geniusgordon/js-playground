@@ -1,14 +1,21 @@
-import { createStore, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import sagas from './sagas';
 import reducer from './reducers';
 import DevTools from './DevTools';
 
 export default function configureStore() {
+  const sagaMiddleware = createSagaMiddleware();
+
   const store = createStore(
     reducer,
     compose(
+      applyMiddleware(sagaMiddleware),
       DevTools.instrument()
     )
   );
+  sagaMiddleware.run(sagas, store);
+
   /* eslint-disable global-require */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
