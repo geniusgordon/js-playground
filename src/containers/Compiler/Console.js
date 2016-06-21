@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import styles from './styles.scss';
 
 class Console extends Component {
@@ -18,9 +19,17 @@ class Console extends Component {
     }
   }
   render() {
-    const logList = this.props.logs.map((log, i) => (
-      <div key={i} className={styles.log}>{log}</div>
-    ));
+    const logList = this.props.logs.map((log, i) => {
+      const logClass = cx(styles.log, {
+        [styles.error]: log.type === 'error',
+      });
+      return (
+        <div key={i} className={logClass}>
+          <span className={styles.prompt}>> </span>
+          <span className={styles.value}>{log.value}</span>
+        </div>
+      );
+    });
     return (
       <div className={styles.console}>
         {logList}

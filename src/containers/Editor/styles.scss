@@ -5,7 +5,8 @@
   font-size: 21px;
   font-family: monospace;
   box-sizing: border-box;
-  overflow: auto;
+  overflow-y: auto;
+  word-wrap: break-word;
 
   pre {
     margin: 0;

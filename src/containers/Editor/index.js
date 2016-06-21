@@ -4,6 +4,8 @@ import CodeUtils from 'draft-js-code';
 import { connect } from 'react-redux';
 import { edit } from './actions';
 import styles from './styles.scss';
+import parseKey from 'parse-key';
+import { matchesKey } from './utils';
 
 class CodeEditor extends Component {
   static propTypes = {
@@ -33,6 +35,7 @@ class CodeEditor extends Component {
     return false;
   }
   keyBindingFn(e) {
+    if (matchesKey(parseKey('ctrl-j'), e)) return null;
     const command = CodeUtils.getKeyBinding(e)
       || getDefaultKeyBinding(e);
     return command;

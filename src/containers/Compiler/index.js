@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { execute, clearLog } from './actions';
 import styles from './styles.scss';
 import parseKey from 'parse-key';
+import { matchesKey } from '../Editor/utils';
 
 class Compiler extends Component {
   static propTypes = {
@@ -22,18 +23,6 @@ class Compiler extends Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
-  matchesKey(key, event) {
-    if (!key) {
-      return false;
-    }
-    const charCode = event.keyCode || event.which;
-    const ch = String.fromCharCode(charCode);
-    return key.name.toUpperCase() === ch.toUpperCase() &&
-      key.alt === event.altKey &&
-      key.ctrl === event.ctrlKey &&
-      key.meta === event.metaKey &&
-      key.shift === event.shiftKey;
-  }
   handleKeyDown(e) {
     if ((
       !e.ctrlKey && !e.metaKey && !e.altKey
@@ -47,12 +36,12 @@ class Compiler extends Component {
     }
     const executeKey = parseKey(this.props.executeKey);
     const clearKey = parseKey(this.props.clearKey);
-    if (this.matchesKey(executeKey, e)) {
+    if (matchesKey(executeKey, e)) {
       e.preventDefault();
       this.handleExecute();
       return;
     }
-    if (this.matchesKey(clearKey, e)) {
+    if (matchesKey(clearKey, e)) {
       e.preventDefault();
       this.handleClear();
       return;

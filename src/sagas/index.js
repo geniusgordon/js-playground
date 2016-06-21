@@ -1,12 +1,11 @@
 import { takeEvery, eventChannel } from 'redux-saga';
 import { take, put, call, fork } from 'redux-saga/effects';
 import Worker from 'worker!./compiler-worker';
-import { consoleLog } from '../containers/Compiler/actions';
 
 function* subscribe(worker) {
   return eventChannel((emit) => {
     worker.addEventListener('message', ({ data }) => {
-      emit(consoleLog(data.join(', ')));
+      emit(data);
     });
     return () => {};
   });
