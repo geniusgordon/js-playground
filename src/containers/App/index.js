@@ -4,10 +4,12 @@ import Editor from '../Editor';
 import Compiler from '../Compiler';
 
 const App = () => (
-  <Window>
-    <Editor />
+  <div>
+    <Window>
+      <Editor />
+    </Window>
     <Compiler executeKey="ctrl-j" />
-  </Window>
+  </div>
 );
 
 export default App;
