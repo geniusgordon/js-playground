@@ -14,6 +14,10 @@ const reducer = handleActions({
     ...state,
     logs: [...state.logs, action.log],
   }),
+  CLEAR_LOG: (state) => ({
+    ...state,
+    logs: [],
+  }),
 }, initialState);
 
 export default reducer;

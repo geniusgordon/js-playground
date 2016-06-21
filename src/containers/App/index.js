@@ -10,7 +10,7 @@ const App = () => (
       <Editor />
       <Console />
     </Window>
-    <Compiler executeKey="ctrl-j" />
+    <Compiler executeKey="ctrl-j" clearKey="ctrl-l" />
   </div>
 );
 
