@@ -16,8 +16,8 @@ class Window extends Component {
     onDragWindowStart: PropTypes.func.isRequired,
     onResizeWindowStart: PropTypes.func.isRequired,
   };
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
   }
