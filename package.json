@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.9.0",
+    "classnames": "^2.2.5",
     "draft-js": "^0.7.0",
     "draft-js-code": "^0.2.0",
     "immutable": "^3.8.1",

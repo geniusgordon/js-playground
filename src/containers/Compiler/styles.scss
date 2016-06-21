@@ -25,7 +25,17 @@
   font-size: 21px;
   font-family: monospace;
   border-top: 1px solid rgba(0, 0, 0, .3);
-  overflow: auto;
+  overflow-y: auto;
   box-sizing: border-box;
+}
+
+.log {
+  &.error {
+    color: red;
+  }
+
+  .value {
+    word-wrap: break-word;
+  }
 }
 
