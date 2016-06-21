@@ -17,3 +17,10 @@ export function runtimeError(error) {
   };
 }
 
+export function consoleLog(log) {
+  return {
+    type: 'CONSOLE_LOG',
+    log,
+  };
+}
+
