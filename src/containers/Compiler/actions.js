@@ -24,3 +24,9 @@ export function consoleLog(log) {
   };
 }
 
+export function clearLog() {
+  return {
+    type: 'CLEAR_LOG',
+  };
+}
+
