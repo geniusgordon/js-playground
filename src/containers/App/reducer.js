@@ -10,6 +10,7 @@ const initialState = {
   top: 100,
   width: 600,
   height: 400,
+  visible: true,
 };
 
 const reducer = handleActions({
@@ -48,6 +49,10 @@ const reducer = handleActions({
     start: [action.x, action.y],
     isResizing: true,
     resizeStart: [state.width, state.height],
+  }),
+  TOGGLE_WINDOW: (state) => ({
+    ...state,
+    visible: !state.visible,
   }),
 }, initialState);
 

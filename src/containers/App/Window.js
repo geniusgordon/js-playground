@@ -11,6 +11,7 @@ class Window extends Component {
     top: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    visible: PropTypes.bool.isRequired,
     onMouseMove: PropTypes.func.isRequired,
     onMouseUp: PropTypes.func.isRequired,
     onDragWindowStart: PropTypes.func.isRequired,
@@ -37,11 +38,12 @@ class Window extends Component {
   }
   render() {
     const {
-      left, top, width, height,
+      left, top, width, height, visible,
       onDragWindowStart, onResizeWindowStart,
     } = this.props;
+    const opacity = visible ? 1 : 0;
     return (
-      <div className={styles.window} style={{ left, top, width, height }}>
+      <div className={styles.window} style={{ left, top, width, height, opacity }}>
         <div
           className={styles.toolbar}
           onMouseDown={onDragWindowStart}
@@ -62,6 +64,7 @@ const mapStateToProps = (state) => ({
   top: state.app.top,
   width: state.app.width,
   height: state.app.height,
+  visible: state.app.visible,
 });
 
 const mapDispatchToProps = (dispatch) => ({

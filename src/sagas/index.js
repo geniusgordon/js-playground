@@ -1,5 +1,5 @@
 import { takeEvery, eventChannel } from 'redux-saga';
-import { take, put, call, fork } from 'redux-saga/effects';
+import { take, put, call, fork, cancel } from 'redux-saga/effects';
 import Worker from 'worker!./compiler-worker';
 
 function* subscribe(worker) {
@@ -11,7 +11,7 @@ function* subscribe(worker) {
   });
 }
 
-function* watchConsoleLog(worker) {
+function* watchConsole(worker) {
   const channel = yield call(subscribe, worker);
   while (true) { // eslint-disable-line
     const action = yield take(channel);
@@ -29,9 +29,15 @@ function* watchExecute(worker, store) {
 }
 
 function* compiler(store) {
-  const worker = new Worker();
-  yield fork(watchExecute, worker, store);
-  yield fork(watchConsoleLog, worker);
+  while (true) { // eslint-disable-line
+    const worker = new Worker();
+    const executeTask = yield fork(watchExecute, worker, store);
+    const consoleTask = yield fork(watchConsole, worker);
+    yield take('TERMINATE');
+    yield cancel(executeTask);
+    yield cancel(consoleTask);
+    worker.terminate();
+  }
 }
 
 export default function* rootSaga(store) {

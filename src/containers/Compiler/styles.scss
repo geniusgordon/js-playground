@@ -8,14 +8,49 @@
   height: 50px;
   border-radius: 3px 3px 0 0;
   box-shadow: 0 0 3px rgba(0, 0, 0, .5);
-  padding: 0 30px;
+  padding: 0 10px;
   display: flex;
+
+  .left {
+    display: flex;
+    flex: 1;
+  }
+
+  .right {
+    display: flex;
+    flex: 1;
+    flex-direction: row-reverse;
+  }
+
+  @media(max-width: 700px) {
+    width: 100%;
+  }
 }
 
 .option {
   line-height: 50px;
   cursor: pointer;
-  padding: 0 10px;
+  width: 50px;
+  margin-left: 5px;
+  text-align: center;
+  font-size: 25px;
+  color: rgba(0, 0, 0, .5);
+
+  &:hover {
+    color: rgba(0, 0, 0, 1);
+
+    &:before {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -30px;
+      background: rgba(0, 0, 0, .8);
+      border-radius: 3px;
+      padding: 5px;
+      color: white;
+      font-size: 12px;
+      line-height: 1;
+    }
+  }
 }
 
 .console {

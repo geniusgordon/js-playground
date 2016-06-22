@@ -28,3 +28,9 @@ export function resizeWindowStart(x, y) {
   };
 }
 
+export function toggleWindow() {
+  return {
+    type: 'TOGGLE_WINDOW',
+  };
+}
+

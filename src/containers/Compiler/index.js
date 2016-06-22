@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { execute, clearLog } from './actions';
+import { MdPlayArrow, MdStop, MdClear, MdDesktopWindows } from 'react-icons/lib/md';
+import { execute, terminate, clearLog } from './actions';
+import { toggleWindow } from '../App/actions';
 import styles from './styles.scss';
 import parseKey from 'parse-key';
 import { matchesKey } from '../Editor/utils';
@@ -14,8 +16,14 @@ class Compiler extends Component {
   constructor(props) {
     super(props);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleWindow = this.handleWindow.bind(this);
     this.handleExecute = this.handleExecute.bind(this);
+    this.handleTerminate = this.handleTerminate.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.renderWindowIcon = this.renderWindowIcon.bind(this);
+    this.renderExecuteIcon = this.renderExecuteIcon.bind(this);
+    this.renderTerminateIcon = this.renderTerminateIcon.bind(this);
+    this.renderClearIcon = this.renderClearIcon.bind(this);
   }
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
@@ -47,27 +55,82 @@ class Compiler extends Component {
       return;
     }
   }
+  handleWindow() {
+    this.props.dispatch(toggleWindow());
+  }
   handleExecute() {
     this.props.dispatch(execute());
+  }
+  handleTerminate() {
+    this.props.dispatch(terminate());
   }
   handleClear() {
     this.props.dispatch(clearLog());
   }
+  renderWindowIcon() {
+    const tooltip = this.props.visible ? "close window" : "open window";
+    return (
+      <div
+        className={styles.option}
+        onClick={this.handleWindow}
+        data-tooltip={tooltip}
+      >
+        <MdDesktopWindows />
+      </div>
+    );
+  }
+  renderExecuteIcon() {
+    return (
+      <div
+        className={styles.option}
+        onClick={this.handleExecute}
+        data-tooltip="run"
+      >
+        <MdPlayArrow />
+      </div>
+    );
+  }
+  renderTerminateIcon() {
+    return (
+      <div
+        className={styles.option}
+        onClick={this.handleTerminate}
+        data-tooltip="stop"
+      >
+        <MdStop />
+      </div>
+    );
+  }
+  renderClearIcon() {
+    return (
+      <div
+        className={styles.option}
+        onClick={this.handleClear}
+        data-tooltip="clear"
+      >
+        <MdClear />
+      </div>
+    );
+  }
   render() {
     return (
       <div className={styles.controlPanel}>
-        <div
-          className={styles.option}
-          onClick={this.handleExecute}
-        >run</div>
-        <div
-          className={styles.option}
-          onClick={this.handleClear}
-        >clear</div>
+        <div className={styles.left}>
+          {this.renderWindowIcon()}
+        </div>
+        <div className={styles.right}>
+          {this.renderExecuteIcon()}
+          {this.renderTerminateIcon()}
+          {this.renderClearIcon()}
+        </div>
       </div>
     );
   }
 }
 
-export default connect()(Compiler);
+const mapStateToProps = (state) => ({
+  visible: state.app.visible,
+});
+
+export default connect(mapStateToProps)(Compiler);
 
