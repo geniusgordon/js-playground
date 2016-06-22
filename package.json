@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "js-playground",
   "scripts": {
+    "build": "webpack",
     "lint": "eslint ./src",
     "start": "node devServer.js",
     "test": "mocha ./src/**/*.test.js",
