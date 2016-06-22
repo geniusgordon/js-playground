@@ -11,6 +11,7 @@ class Compiler extends Component {
   static propTypes = {
     executeKey: PropTypes.string.isRequired,
     clearKey: PropTypes.string.isRequired,
+    visible: PropTypes.bool,
     dispatch: PropTypes.func,
   };
   constructor(props) {
@@ -68,7 +69,7 @@ class Compiler extends Component {
     this.props.dispatch(clearLog());
   }
   renderWindowIcon() {
-    const tooltip = this.props.visible ? "close window" : "open window";
+    const tooltip = this.props.visible ? 'close window' : 'open window';
     return (
       <div
         className={styles.option}
