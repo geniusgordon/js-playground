@@ -41,7 +41,7 @@ class Window extends Component {
       left, top, width, height, visible,
       onDragWindowStart, onResizeWindowStart,
     } = this.props;
-    const opacity = visible ? 1 : 0;
+    const display = visible ? 'none': 'flex';
     return (
       <div className={styles.window} style={{ left, top, width, height, opacity }}>
         <div

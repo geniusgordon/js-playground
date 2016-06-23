@@ -10,7 +10,7 @@ const initialState = {
   top: 100,
   width: 600,
   height: 400,
-  visible: true,
+  visible: false,
 };
 
 const reducer = handleActions({
