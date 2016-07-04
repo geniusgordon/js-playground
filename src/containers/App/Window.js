@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { MdClose } from 'react-icons/lib/md';
 import { throttle } from 'lodash/function';
-import { mouseMove, mouseUp, dragWindowStart, resizeWindowStart } from './actions';
+import {
+  mouseMove, mouseUp, dragWindowStart, resizeWindowStart, toggleWindow,
+} from './actions';
 import styles from './styles.scss';
 
 class Window extends Component {
@@ -16,6 +19,7 @@ class Window extends Component {
     onMouseUp: PropTypes.func.isRequired,
     onDragWindowStart: PropTypes.func.isRequired,
     onResizeWindowStart: PropTypes.func.isRequired,
+    handleWindow: PropTypes.func.isRequired,
   };
   constructor(props) {
     super(props);
@@ -39,7 +43,7 @@ class Window extends Component {
   render() {
     const {
       left, top, width, height, visible,
-      onDragWindowStart, onResizeWindowStart,
+      onDragWindowStart, onResizeWindowStart, handleWindow,
     } = this.props;
     const display = visible ? 'flex' : 'none';
     return (
@@ -47,7 +51,12 @@ class Window extends Component {
         <div
           className={styles.toolbar}
           onMouseDown={onDragWindowStart}
-        />
+        >
+          <div className={styles.close} onClick={handleWindow}>
+            <MdClose />
+          </div>
+          <div className={styles.title}>JS 模擬器</div>
+        </div>
         <div
           className={styles.resizeHandle}
           onMouseDown={onResizeWindowStart}
@@ -81,6 +90,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onResizeWindowStart(e) {
     dispatch(resizeWindowStart(e.clientX, e.clientY));
+  },
+  handleWindow() {
+    dispatch(toggleWindow());
   },
 });
 

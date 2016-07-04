@@ -118,6 +118,7 @@ class Compiler extends Component {
       <div className={styles.controlPanel}>
         <div className={styles.left}>
           {this.renderWindowIcon()}
+          <div className={styles.title}>JS 模擬器</div>
         </div>
         <div className={styles.right}>
           {this.renderExecuteIcon()}
