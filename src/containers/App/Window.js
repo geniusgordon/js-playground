@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { MdClose } from 'react-icons/lib/md';
+import MdClose from 'react-icons/lib/md/close';
 import { throttle } from 'lodash/function';
 import {
   mouseMove, mouseUp, dragWindowStart, resizeWindowStart, toggleWindow,

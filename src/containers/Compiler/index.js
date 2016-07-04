@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { MdPlayArrow, MdStop, MdClear, MdDesktopWindows } from 'react-icons/lib/md';
+import MdPlayArrow from 'react-icons/lib/md/play-arrow';
+import MdStop from 'react-icons/lib/md/stop';
+import MdClear from 'react-icons/lib/md/clear';
+import MdDesktopWindows from 'react-icons/lib/md/desktop-windows';
 import { execute, terminate, clearLog } from './actions';
 import { toggleWindow } from '../App/actions';
 import styles from './styles.scss';
